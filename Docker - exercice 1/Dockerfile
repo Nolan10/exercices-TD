@@ -1,3 +1,3 @@
 FROM debian:latest
-COPY msg.txt /opt/
+ADD msg.txt /opt/
 CMD cat /opt/msg.txt
