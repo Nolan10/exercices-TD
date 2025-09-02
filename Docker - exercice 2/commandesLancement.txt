@@ -1,0 +1,4 @@
+docker build -t nodejs . 
+docker run --rm  -p 3030:3030 nodejs
+
+Le -p permet d'exposer le port 3030
