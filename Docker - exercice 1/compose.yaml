@@ -1,0 +1,10 @@
+services:
+  reader:
+    build: ./image
+    configs:
+      - source: message
+        target: /opt/msg.txt
+
+configs:
+  message:
+    file: ./msg.txt
