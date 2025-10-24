@@ -1,0 +1,26 @@
+services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+    secrets:
+      - db_password
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      retries: 5
+      start_period: 5s
+      timeout: 3s
+
+  client:
+    build: ./debian_psql
+    env_file: .env
+    secrets:
+      - db_password
+    depends_on:
+      db:
+        condition: service_healthy
+
+secrets:
+  db_password:
+    file: db_password.txt

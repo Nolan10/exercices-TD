@@ -5,17 +5,17 @@ docker run -d --name postgres_cli `
     postgres:latest
 
 docker run -d --name postgres_envfile `
-    --env-file ./env.txt `
+    --env-file ./.env `
     postgres:latest
 
 New-Item -ItemType Directory -Force -Path ./data | Out-Null
 docker run -d --name postgres_bind `
-    --env-file ./env.txt `
+    --env-file ./.env `
     -v ${PWD}/data:/var/lib/postgresql/data `
     postgres:latest
 
 docker volume create db-storage
 docker run -d --name postgres_volume `
-    --env-file ./env.txt `
+    --env-file ./.env `
     --mount source=db-storage,target=/var/lib/postgresql/data `
     postgres:latest

@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:latest
+    env_file: .env
+    secrets:
+      - db_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
+
+secrets:
+  db_password:
+    file: db_password.txt
